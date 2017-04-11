@@ -2,22 +2,11 @@
 <html lang="ru">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <title>Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Н. И. Ашмарин</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link href="./fa/css/font-awesome.min.css" rel="stylesheet">
-        <style>
-            html {
-                padding-top: 1rem;
-            }
-            .margin-top {
-                margin-top: 1rem;
-            }
-            .margin-bottom {
-                margin-bottom: 1rem;
-            }
-        </style>
+        <link href="./css/site.css" rel="stylesheet">
     </head>
 	<body>
 		<div class="container">
@@ -27,12 +16,12 @@
 					<button id="search-btn" class="btn btn-info btn-lg" type="button"><span class="fa fa-search" aria-hidden="true"></span></button>
 				</span>
 			</div>
-            <div id="chuvkeys">
-                <button type="button" class="btn btn-secondary btn-sms" v-for="button in buttons">{{ button }}</button>              
+            <div id="chuvkeys" class="button-block text-center">
+                <button type="button" class="btn btn-secondary btn-sm btn-chuv" v-for="button in buttons">{{ button }}</button>              
             </div>  
 			<div id="app" class="margin-top">
                 <div class="card margin-bottom" v-for="article in articles">
-                    <div class="card-block">
+                    <div class="card-block text-justify">
                         <h4 class="card-title">{{ article.word_orig }}</h4>
                         <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>
                     </div>
@@ -45,57 +34,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/vue"></script>
-        <script>
-            /* сообщение при загрузке страницы и при пустом ответе от сервера */
-            var empty_response = [{ 'word_orig': 'Пусто!', 'word_desc': 'Наберите строку для поиска.' }];
-            /* ajax запрос */
-			$('#search-btn').click(
-				function() {
-					var term = $('#search-term').val();
-					$.ajax({
-						method: 'GET', 
-						data: 'term=' + term, 
-						url: 'http://samahsar.cv-haval.org/custom/search', 
-						success: function(data) {
-                            if(!$.isEmptyObject(data)) {
-                                app.articles = data;
-                            } else {
-                                app.articles = empty_response;
-                            }                            
-                            console.log(data);
-						},
-						error: function (err) {
-							console.log(err);
-						}
-					});
-				}
-			);
-            /* ajax запрос */
-            
-            /* vue приложение */
-			var app = new Vue({
-				el: '#app',
-				data: {
-					articles: empty_response
-				}
-			});
-            /* vue приложение */
-            
-            /* vue приложение */
-			var buttons = new Vue({
-				el: '#chuvkeys',
-				data: {
-					buttons: ['ӑ', 'ӗ', 'љ', 'њ', 'р̌', 'ҫ', 'т̌', 'ӳ', 'ђ']
-				}
-			});
-            /* vue приложение */
-            
-            /* кнопки с чувашскими символами */
-            $('#chuvkeys').on( 'click', 'button', function(){
-                var result = $('#search-field').val() + $(this).text();
-                $('#search-field').val(result);
-            });
-            /* кнопки с чувашскими символами */
-        </script>
+        <script src="./js/app.js"></script>
 	</body>
 </html>
