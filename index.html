@@ -30,7 +30,7 @@
                 <div class="card margin-bottom" v-for="article in articles">
                     <div class="card-block">
                         <h4 class="card-title">{{ article.word_orig }}</h4>
-                        <p class="card-text">{{ article.word_desc }}</p>
+                        <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>
                     </div>
                 </div>
 			</div>
@@ -67,7 +67,7 @@
 			var app = new Vue({
 				el: '#app',
 				data: {
-					articles: empty_response,
+					articles: empty_response
 				}
 			});
         </script>
