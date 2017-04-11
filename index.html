@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>Test</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div class="input-group">
+				<input id="search-term" class="form-control" type="text" name="term" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button id="search-btn" class="btn btn-default" type="button">Go!</button>
+				</span>
+			</div>
+			<div id="app">
+				<ol>
+					<li v-for="article in articles">{{ article.word_orig }}</li>
+				</ol>
+			</div>
+		</div>
+        
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/vue"></script>
+        <script>
+			$('#search-btn').click(
+				function() {
+					var term = $('#search-term').val();
+					$.ajax({
+						method: 'GET', 
+						data: 'term=' + term, 
+						url: 'http://samahsar.cv-haval.org/custom/search', 
+						success: function(data) {
+							app.articles = data;
+						},
+						error: function (err) {
+							console.log(err);
+						}
+					});
+				}
+			);
+			var app = new Vue({
+				el: '#app',
+				data: {
+					articles: [],
+				}
+			});
+        </script>
+	</body>
+</html>
