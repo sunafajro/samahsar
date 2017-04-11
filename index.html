@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <title>Test</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link href="./fa/css/font-awesome.min.css" rel="stylesheet">
         <style>
             html {
                 padding-top: 1rem;
@@ -21,11 +22,14 @@
 	<body>
 		<div class="container">
 			<div class="input-group">
-				<input id="search-term" class="form-control" type="text" name="term" placeholder="что ищем...">
+				<input id="search-field" class="form-control form-control-lg" type="text" name="term" placeholder="что ищем...">
 				<span class="input-group-btn">
-					<button id="search-btn" class="btn btn-info" type="button">Go!</button>
+					<button id="search-btn" class="btn btn-info btn-lg" type="button"><span class="fa fa-search" aria-hidden="true"></span></button>
 				</span>
 			</div>
+            <div id="chuvkeys">
+                <button type="button" class="btn btn-secondary btn-sms" v-for="button in buttons">{{ button }}</button>              
+            </div>  
 			<div id="app" class="margin-top">
                 <div class="card margin-bottom" v-for="article in articles">
                     <div class="card-block">
@@ -42,7 +46,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/vue"></script>
         <script>
+            /* сообщение при загрузке страницы и при пустом ответе от сервера */
             var empty_response = [{ 'word_orig': 'Пусто!', 'word_desc': 'Наберите строку для поиска.' }];
+            /* ajax запрос */
 			$('#search-btn').click(
 				function() {
 					var term = $('#search-term').val();
@@ -64,12 +70,32 @@
 					});
 				}
 			);
+            /* ajax запрос */
+            
+            /* vue приложение */
 			var app = new Vue({
 				el: '#app',
 				data: {
 					articles: empty_response
 				}
 			});
+            /* vue приложение */
+            
+            /* vue приложение */
+			var buttons = new Vue({
+				el: '#chuvkeys',
+				data: {
+					buttons: ['ӑ', 'ӗ', 'љ', 'њ', 'р̌', 'ҫ', 'т̌', 'ӳ', 'ђ']
+				}
+			});
+            /* vue приложение */
+            
+            /* кнопки с чувашскими символами */
+            $('#chuvkeys').on( 'click', 'button', function(){
+                var result = $('#search-field').val() + $(this).text();
+                $('#search-field').val(result);
+            });
+            /* кнопки с чувашскими символами */
         </script>
 	</body>
 </html>
