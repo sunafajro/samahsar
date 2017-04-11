@@ -5,25 +5,38 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <title>Test</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	</head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <style>
+            .margin-top {
+                margin-top: 1rem;
+            }
+            .margin-bottom {
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
 	<body>
 		<div class="container">
 			<div class="input-group">
 				<input id="search-term" class="form-control" type="text" name="term" placeholder="Search for...">
 				<span class="input-group-btn">
-					<button id="search-btn" class="btn btn-default" type="button">Go!</button>
+					<button id="search-btn" class="btn btn-info" type="button">Go!</button>
 				</span>
 			</div>
-			<div id="app">
-				<ol>
-					<li v-for="article in articles">{{ article.word_orig }}</li>
-				</ol>
+			<div id="app" class="margin-top">
+                <div class="card margin-bottom" v-for="article in articles">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ article.word_orig }}</h4>
+                        <p class="card-text">{{ article.word_desc }}</p>
+                    </div>
+                </div>
 			</div>
 		</div>
         
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/vue"></script>
         <script>
 			$('#search-btn').click(
@@ -35,6 +48,7 @@
 						url: 'http://samahsar.cv-haval.org/custom/search', 
 						success: function(data) {
 							app.articles = data;
+                            console.log(data);
 						},
 						error: function (err) {
 							console.log(err);
@@ -45,7 +59,7 @@
 			var app = new Vue({
 				el: '#app',
 				data: {
-					articles: [],
+					articles: [{ 'word_orig': 'Пусто!', 'word_desc': 'Наберите строку для поиска.' }],
 				}
 			});
         </script>
