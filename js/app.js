@@ -15,7 +15,7 @@ var search = new Vue({
                     $.ajax({
                         method: 'GET', 
                         data: 'term=' + newterm, 
-                        url: 'http://samahsar.cv-haval.org/custom/search', 
+                        url: 'https://samahsar.cv-haval.org/custom/search', 
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
