@@ -19,3 +19,7 @@ html {
 .button-block .btn-chuv:last-child {
     margin-right: 0;
 }
+
+[v-cloak] {
+  display: none;
+}

@@ -4,22 +4,24 @@ var empty_response = [{ 'word_orig': 'Пусто!', 'word_desc': 'Наберит
 $('#search-btn').click(
     function() {
         var term = $('#search-field').val();
-        $.ajax({
-            method: 'GET', 
-            data: 'term=' + term, 
-            url: 'http://samahsar.cv-haval.org/custom/search', 
-            success: function(data) {
-                if(!$.isEmptyObject(data)) {
-                    app.articles = data;
-                } else {
-                    app.articles = empty_response;
-                }                            
-                console.log(data);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+        if(term) {
+            $.ajax({
+                method: 'GET', 
+                data: 'term=' + term, 
+                url: 'http://samahsar.cv-haval.org/custom/search', 
+                success: function(data) {
+                    if(!$.isEmptyObject(data)) {
+                        app.articles = data;
+                    } else {
+                        app.articles = empty_response;
+                    }                            
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
     }
 );
 /* ajax запрос */
