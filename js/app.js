@@ -52,3 +52,12 @@ $('#chuvkeys').on( 'click', 'button', function(){
     $('#search-field').val(result);
 });
 /* кнопки с чувашскими символами */
+
+/* кнопка стирания результатов */
+$('#erase-btn').click(
+    function(){        
+        term = $('#search-field').val('');
+        app.articles = empty_response;
+    }
+);
+/* кнопка стирания результатов */
