@@ -1,13 +1,14 @@
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
 var empty_response = [{ 'word_orig': 'Пусто!', 'word_desc': 'Наберите строку для поиска.' }];
+var term = $('#search-field').val();
 /* ajax запрос */
 $('#search-btn').click(
     function() {
-        var term = $('#search-field').val();
-        if(term) {
+        var newterm = $('#search-field').val();
+        if(newterm && newterm != term) {
             $.ajax({
                 method: 'GET', 
-                data: 'term=' + term, 
+                data: 'term=' + newterm, 
                 url: 'http://samahsar.cv-haval.org/custom/search', 
                 success: function(data) {
                     if(!$.isEmptyObject(data)) {
@@ -21,6 +22,7 @@ $('#search-btn').click(
                     console.log(err);
                 }
             });
+            term = newterm;
         }
     }
 );
