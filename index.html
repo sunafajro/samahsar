@@ -8,21 +8,22 @@
         <link href="./fa/css/font-awesome.min.css" rel="stylesheet">
         <link href="./css/site.css" rel="stylesheet">
     </head>
+    
 	<body>
 		<div class="container">
-			<div class="input-group">
+			<div id="search-block" class="input-group">
 				<span class="input-group-btn">
-					<button id="erase-btn" class="btn btn-warning btn-lg" type="button"><span class="fa fa-eraser" aria-hidden="true"></span></button>
+					<button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="erase"><span class="fa fa-eraser" aria-hidden="true"></span></button>
 				</span>
-				<input id="search-field" class="form-control form-control-lg" type="text" name="term" placeholder="что ищем...">
+				<input id="search-field" class="form-control form-control-lg" type="text" name="term" placeholder="что ищем..." v-on:keyup.enter="search">
 				<span class="input-group-btn">
-					<button id="search-btn" class="btn btn-info btn-lg" type="button"><span class="fa fa-search" aria-hidden="true"></span></button>
+					<button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="search"><span class="fa fa-search" aria-hidden="true"></span></button>
 				</span>
 			</div>
-            <div id="chuvkeys" class="button-block text-center" v-cloak>
-                <button type="button" class="btn btn-secondary btn-sm btn-chuv" v-for="button in buttons">{{ button }}</button>              
+            <div id="chuvkeys-block" class="button-block text-center" v-cloak>
+                <button type="button" class="btn btn-secondary btn-sm btn-chuv" v-for="button in buttons" v-on:click="addletter">{{ button }}</button>              
             </div>  
-			<div id="app" class="margin-top" v-cloak>
+			<div id="result-block" class="margin-top" v-cloak>
                 <div class="card margin-bottom" v-for="article in articles">
                     <div class="card-block text-justify">
                         <h4 class="card-title">{{ article.word_orig }}</h4>
@@ -30,8 +31,7 @@
                     </div>
                 </div>
 			</div>
-		</div>
-        
+		</div>        
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
