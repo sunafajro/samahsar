@@ -1,5 +1,5 @@
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
-var empty_response = [{ 'word_orig': 'Пусто!', 'word_desc': 'Наберите строку для поиска.' }];
+var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите строку для поиска.', 'empty' : 'true' }];
 /* считываем модержимое строки поиска */
 var term = $('#search-field').val();
 
@@ -11,7 +11,7 @@ var search = new Vue({
         search:
             function() {
                 var newterm = $('#search-field').val();
-                if(newterm && newterm != term) {
+                if(newterm && newterm !== term) {
                     $.ajax({
                         method: 'GET', 
                         data: 'term=' + newterm, 
