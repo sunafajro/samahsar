@@ -91,12 +91,8 @@ var buttons = new Vue({
 var lastterms = new Vue({
     el: '#lastterms-block',
     data: {
-        terms: cookie
-    },
-    methods: {
-        toggle: function (event) {
-            $('#lastterms-list').toggle('fast');
-        }
+        terms: cookie,
+        toggle: false
     }
 });
 /* блок со списком последних найденных терминов */
