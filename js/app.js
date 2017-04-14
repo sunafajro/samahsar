@@ -3,6 +3,8 @@ if($.cookie('lastterms') === undefined) {
     $.cookie('lastterms', '', { expires: 1, path: '/' });
 }
 
+cookie = $.cookie('lastterms') !== '' ? $.cookie('lastterms').split(':') : NULL;
+
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
 var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите строку для поиска.', 'empty' : 'true' }];
 /* считываем модержимое строки поиска */
@@ -24,15 +26,13 @@ var search = new Vue({
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
-                                if($.cookie('lastterms') != undefined) {
-                                    var cookie = $.cookie('lastterms');
-                                    if(cookie != '') {
-                                        cookie = cookie + ':';
-                                    }
-                                    cookie = cookie + newterm;
-                                    $.cookie('lastterms', cookie, { expires: 1, path: '/' });
-                                    lastterms.terms = cookie.split(':');
+                                var cookie = $.cookie('lastterms');
+                                if(cookie != '') {
+                                    cookie = cookie + ':';
                                 }
+                                cookie = cookie + newterm;
+                                $.cookie('lastterms', cookie, { expires: 1, path: '/' });
+                                lastterms.terms = cookie.split(':');
                             } else {
                                 result.articles = empty_response;
                             }                            
@@ -84,7 +84,7 @@ var buttons = new Vue({
 var lastterms = new Vue({
     el: '#lastterms-block',
     data: {
-        terms: $.cookie('lastterms').split(':')
+        terms: cookie
     }
 });
 /* блок со списком последних найденных терминов */
