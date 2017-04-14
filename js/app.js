@@ -39,11 +39,12 @@ var search = new Vue({
                                     cookie = cookie + ':';
                                 }
                                 cookie = cookie + newterm;
-                                /* оставляем только уникальные термины */
+                                /* оставляем только 10 последних уникальных терминов */
                                 arr = cookie.split(':');
                                 $.uniqueSort(arr);
+                                arr.slice(-10);
                                 cookie = arr.join(':');
-                                /* оставляем только уникальные термины */
+                                /* обновляем куки и список последних терминов */
                                 $.cookie('lastterms', cookie, { expires: 1, path: '/' });
                                 lastterms.terms = cookie.split(':');
                             } else {
