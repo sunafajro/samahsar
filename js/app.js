@@ -81,6 +81,8 @@ var buttons = new Vue({
 /* блок со списком последних найденных терминов */
 var lastterms = new Vue({
     el: '#lastterms-block',
-    data: $.cookie('lastterms').split(':')
+    data: {
+        terms: $.cookie('lastterms').split(':')
+    }
 });
 /* блок со списком последних найденных терминов */

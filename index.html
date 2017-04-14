@@ -34,7 +34,11 @@
                     <strong>{{ article.title }}</strong> {{ article.body }}
                 </div>
 			</div>
-            <div id="lastterms-block"></div>
+            <div id="lastterms-block" v-cloak>
+                <ul>
+                    <li v-for="term in terms" v-if="!term.empty"></li>
+                </ul>
+            </div>
 		</div>        
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
