@@ -1,9 +1,17 @@
-/* создаем пустой куки для хранения терминов */
-if($.cookie('lastterms') === undefined) {
-    $.cookie('lastterms', '', { expires: 1, path: '/' });
-}
+/* проверяем что страничка запущена с сервера инче куки нам не понадобятся */
+if(window.location.protocol == 'http:' || window.location.protocol == 'https:') {
+    /* проверяем что кука задана */
+    if($.cookie('lastterms') === undefined) {
+        /* создаем пустую куку для хранения терминов */
+        $.cookie('lastterms', '', { expires: 1, path: '/' });
+    }
+    /* дробим куку в массив для блока недавних терминов */
+    var cookie = $.cookie('lastterms') !== '' ? $.cookie('lastterms').split(':') : [];
 
-var cookie = $.cookie('lastterms') !== '' ? $.cookie('lastterms').split(':') : [];
+} else {
+    var cookie = [];
+}
+/* проверяем что страничка запущена с сервера инче куки нам не понадобятся */
 
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
 var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите строку для поиска.', 'empty' : 'true' }];
