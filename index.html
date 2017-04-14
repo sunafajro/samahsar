@@ -21,7 +21,7 @@
 				</span>
 			</div>
             <div id="chuvkeys-block" class="button-block text-center" v-cloak>
-                <button type="button" class="btn btn-secondary btn-sm btn-chuv" v-for="button in buttons" v-on:click="addletter">{{ button }}</button>              
+                <button type="button" class="btn btn-secondary btn-sm btn-chuv" v-for="button in buttons" v-on:click="addletter" v-if="!button.empty">{{ button }}</button>              
             </div>  
 			<div id="result-block" class="margin-top" v-cloak>
                 <div class="card margin-bottom" v-for="article in articles" v-if="!article.empty">
@@ -36,7 +36,7 @@
 			</div>
             <div id="lastterms-block" v-cloak>
                 <ul>
-                    <li v-for="term in terms" v-if="!term.empty"></li>
+                    <li v-for="term in terms" v-if="!term.empty">{{ term }}</li>
                 </ul>
             </div>
 		</div>        
