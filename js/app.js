@@ -29,7 +29,9 @@ var search = new Vue({
                                     if(cookie != '') {
                                         cookie = cookie + ':';
                                     }
-                                    $.cookie('lastterms', cookie + newterm, { expires: 1, path: '/' });
+                                    cookie = cookie + newterm;
+                                    $.cookie('lastterms', cookie, { expires: 1, path: '/' });
+                                    lastterms.terms = cookie.split(':');
                                 }
                             } else {
                                 result.articles = empty_response;
