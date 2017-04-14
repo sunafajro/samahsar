@@ -23,19 +23,19 @@ html {
 .lastterms-list {
     position: fixed;
     top: 30%;
-    padding: 0.5rem;
+    padding: 0.2rem;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 0 5px 5px 0;
     background-color: white;
 }
 
 .lastterms-list ul {
-    padding: 0.3rem;
+    padding: 0.2rem;
 }
 
 .lastterms-list li {
     list-style-type: none;
-    padding: 0.3rem;
+    padding: 0.2rem;
 }
 
 [v-cloak] {

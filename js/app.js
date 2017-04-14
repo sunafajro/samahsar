@@ -80,7 +80,6 @@ var buttons = new Vue({
     },
     methods: {
         addletter: function (event) {
-            console.log(event);
             var result = $('#search-field').val() + event.target.innerText;
             $('#search-field').val(result);            
         }
@@ -93,6 +92,11 @@ var lastterms = new Vue({
     el: '#lastterms-block',
     data: {
         terms: cookie
+    },
+    methods: {
+        toggle: function (event) {
+            $('#lastterms-list').toggle('fast');
+        }
     }
 });
 /* блок со списком последних найденных терминов */
