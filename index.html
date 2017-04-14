@@ -42,10 +42,11 @@
 
         <div id="lastterms-block" class="lastterms-list" v-cloak>
             <button id="" class="btn btn-primary btn-sm" v-on:click="toggle = !toggle">Предыдущие</button>
-            <ul id="lastterms-list" v-if="toggle">
-                <li class="text-center" v-for="term in terms" v-if="!term.empty">{{ term }}</li>
-            </ul>
-            
+            <transition name="fade">
+                <ul id="lastterms-list" v-if="toggle">
+                    <li class="text-center" v-for="term in terms" v-if="!term.empty">{{ term }}</li>
+                </ul>
+            </transition>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

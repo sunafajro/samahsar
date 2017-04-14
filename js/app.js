@@ -39,6 +39,11 @@ var search = new Vue({
                                     cookie = cookie + ':';
                                 }
                                 cookie = cookie + newterm;
+                                /* оставляем только уникальные термины */
+                                arr = cookie.split(':');
+                                $.uniqueSort(arr);
+                                cookie = arr.join(':');
+                                /* оставляем только уникальные термины */
                                 $.cookie('lastterms', cookie, { expires: 1, path: '/' });
                                 lastterms.terms = cookie.split(':');
                             } else {
