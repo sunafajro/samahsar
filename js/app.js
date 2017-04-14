@@ -22,7 +22,7 @@ var search = new Vue({
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
-                                if($.cookie('lastterms')) {
+                                if($.cookie('lastterms') != undefined) {
                                     var cookie = $.cookie('lastterms');
                                     if(cookie != '') {
                                         cookie = cookie + ':';
