@@ -3,7 +3,7 @@ if($.cookie('lastterms') === undefined) {
     $.cookie('lastterms', '', { expires: 1, path: '/' });
 }
 
-cookie = $.cookie('lastterms') !== '' ? $.cookie('lastterms').split(':') : NULL;
+var cookie = $.cookie('lastterms') !== '' ? $.cookie('lastterms').split(':') : [];
 
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
 var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите строку для поиска.', 'empty' : 'true' }];
