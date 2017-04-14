@@ -22,8 +22,13 @@ var search = new Vue({
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
-                                var cookie = $.cookie('lastterms');
-                                $.cookie('lastterms', cookie + ':' + newterm, { expires: 1, path: '/' });
+                                if($.cookie('lastterms')) {
+                                    var cookie = $.cookie('lastterms');
+                                    if(cookie != '') {
+                                        cookie = cookie + ':';
+                                    }
+                                    $.cookie('lastterms', cookie + newterm, { expires: 1, path: '/' });
+                                }
                             } else {
                                 result.articles = empty_response;
                             }                            
