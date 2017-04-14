@@ -42,7 +42,7 @@ var search = new Vue({
                                 /* оставляем только 10 последних уникальных терминов */
                                 arr = cookie.split(':');
                                 $.uniqueSort(arr);
-                                arr.slice(-10);
+                                arr = arr.slice(-10);
                                 cookie = arr.join(':');
                                 /* обновляем куки и список последних терминов */
                                 $.cookie('lastterms', cookie, { expires: 1, path: '/' });
