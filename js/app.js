@@ -77,3 +77,10 @@ var buttons = new Vue({
     }
 });
 /* блок с чувашскими буквами */
+
+/* блок со списком последних найденных терминов */
+var lastterms = new Vue({
+    el: '#lastterms-block',
+    data: $.cookie('lastterms').split(':')
+});
+/* блок со списком последних найденных терминов */
