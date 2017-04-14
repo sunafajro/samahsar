@@ -1,3 +1,6 @@
+/* создаем пустой куки для хранения терминов */
+$.cookie('lastterms', '', { expires: 1, path: '/' });
+
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
 var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите строку для поиска.', 'empty' : 'true' }];
 /* считываем модержимое строки поиска */
@@ -19,7 +22,8 @@ var search = new Vue({
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
-                                
+                                var cookie = $.cookie('lastterms');
+                                $.cookie('lastterms', cookie + ':' + newterm, { expires: 1, path: '/' });
                             } else {
                                 result.articles = empty_response;
                             }                            
