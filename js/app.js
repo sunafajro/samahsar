@@ -9,7 +9,7 @@ if(window.location.protocol == 'http:' || window.location.protocol == 'https:') 
     var cookie = $.cookie('lastterms') !== '' ? $.cookie('lastterms').split(':') : [];
 
 } else {
-    var cookie = [];
+    var cookie = [ 1, 2, 3];
 }
 /* проверяем что страничка запущена с сервера инче куки нам не понадобятся */
 

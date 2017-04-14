@@ -20,6 +20,24 @@ html {
     margin-right: 0;
 }
 
+.lastterms-list {
+    position: fixed;
+    top: 30%;
+    padding: 0.5rem;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0 5px 5px 0;
+    background-color: white;
+}
+
+.lastterms-list ul {
+    padding: 0.3rem;
+}
+
+.lastterms-list li {
+    list-style-type: none;
+    padding: 0.3rem;
+}
+
 [v-cloak] {
   display: none;
 }

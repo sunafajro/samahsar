@@ -37,12 +37,15 @@
                     <strong>{{ article.title }}</strong> {{ article.body }}
                 </div>
 			</div>
-            <div id="lastterms-block" v-cloak>
-                <ul>
-                    <li v-for="term in terms" v-if="!term.empty">{{ term }}</li>
-                </ul>
-            </div>
-		</div>        
+            
+		</div>
+
+        <div id="lastterms-block" class="lastterms-list" v-cloak>
+            <b>Предыдущие:</b>
+            <ul>
+                <li v-for="term in terms" v-if="!term.empty">{{ term }}</li>
+            </ul>
+        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
