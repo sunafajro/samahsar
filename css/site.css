@@ -1,5 +1,5 @@
 html {
-    padding-top: 1rem;
+    padding-top: 2rem;
 }
 .margin-top {
     margin-top: 1rem;
@@ -24,6 +24,7 @@ html {
     position: fixed;
     top: 0;
     padding: 0;
+    z-index: 10;
 
 }
 
