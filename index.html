@@ -41,7 +41,7 @@
 		</div>
 
         <div id="lastterms-block" class="lastterms-list" v-cloak>
-            <button id="" class="btn btn-primary btn-sm" v-on:click="toggle = !toggle">Предыдущие</button>
+            <button id="" class="btn btn-primary btn-sm" v-on:click="toggle = !toggle">История</button>
             <transition name="fade">
                 <ul id="lastterms-list" v-if="toggle">
                     <li class="text-center" v-for="term in terms" v-if="!term.empty">{{ term }}</li>
