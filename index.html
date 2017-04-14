@@ -30,13 +30,15 @@
             </div>  
 			<div id="result-block" class="margin-top" v-cloak>
                 <div class="card margin-bottom" v-for="article in articles" v-if="!article.empty">
-                    <div class="card-header"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small></div>
+                    <div class="card-header"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
+                    <a class="btn btn-secondary btn-sm float-right" data-toggle="modal" data-target="#infoModal" title="Сообщить об ошибке!"><span class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></span></a>
+                    </div>
                     <div class="card-block text-justify">
                         <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>                        
-                    </div>                    
+                    </div>                                      
                 </div>
                 <div class="alert alert-warning" role="alert" v-for="article in articles"  v-if="article.empty" v-cloak>
-                    <strong>{{ article.title }}</strong> {{ article.body }}
+                    <strong>{{ article.title }}</strong> {{ article.body }}                    
                 </div>
 			</div>
             
