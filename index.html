@@ -18,11 +18,11 @@
             </div>
 			<div id="search-block" class="input-group">
 				<span class="input-group-btn">
-					<button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="erase"><span class="fa fa-eraser" aria-hidden="true"></span></button>
+					<button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="eraseterm"><span class="fa fa-eraser" aria-hidden="true"></span></button>
 				</span>
-				<input id="search-field" class="form-control form-control-lg" type="text" name="term" placeholder="Сăмаха çырăр..." v-on:keyup.enter="search">
+				<input id="search-field" class="form-control form-control-lg" type="text" name="term" placeholder="Сăмаха çырăр..." v-on:keyup.enter="searchterm">
 				<span class="input-group-btn">
-					<button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="search"><span class="fa fa-search" aria-hidden="true"></span></button>
+					<button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="searchterm"><span class="fa fa-search" aria-hidden="true"></span></button>
 				</span>
 			</div>
             <div id="chuvkeys-block" class="button-block text-center" v-cloak>
@@ -30,7 +30,7 @@
             </div>  
 			<div id="result-block" class="margin-top" v-cloak>
                 <div class="card margin-bottom" v-for="article in articles" v-if="!article.empty">
-                    <div class="card-header"><strong>{{ article.word_orig }}</strong> <small>[{{article.volume}} : {{article.fpage}}<span v-if="article.fpage !== article.lpage"> - {{article.lpage}}</span>]</small></div>
+                    <div class="card-header"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small></div>
                     <div class="card-block text-justify">
                         <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>                        
                     </div>                    
@@ -46,7 +46,7 @@
             <button id="" class="btn btn-primary btn-sm" v-on:click="toggle = !toggle">История</button>
             <transition name="fade">
                 <ul id="lastterms-list" v-if="toggle">
-                    <li class="text-center" v-for="term in terms" v-if="!term.empty">{{ term }}</li>
+                    <li class="text-center" v-for="term in terms" v-if="!term.empty"><a data-toggle="term" :data-item="term" role="button" tabindex="0">{{ term }}</a></li>
                 </ul>
             </transition>
         </div>

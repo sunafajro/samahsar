@@ -23,7 +23,7 @@ var search = new Vue({
     el: '#search-block',
     data: '',
     methods: {
-        search:
+        searchterm:
             function() {
                 var newterm = $('#search-field').val();
                 if(newterm && newterm !== term) {
@@ -50,7 +50,6 @@ var search = new Vue({
                             } else {
                                 result.articles = empty_response;
                             }                            
-                            console.log(data);
                         },
                         error: function (err) {
                             console.log(err);
@@ -60,10 +59,30 @@ var search = new Vue({
                 }
                 $('[data-toggle="tooltip"]').tooltip();
             },
-        erase: 
+        eraseterm: 
             function(){        
                 term = $('#search-field').val('');
                 result.articles = empty_response;
+            },
+        getarticle:
+            function(id) {
+                $.ajax({
+                    method: 'GET', 
+                    data: 'id=' + id, 
+                    url: 'https://samahsar.cv-haval.org/custom/view', 
+                    success: function(data) {
+
+                        if(!$.isEmptyObject(data)) {
+                            term = $('#search-field').val(data.word_orig);
+                            result.articles = [data];
+                        } else {
+                            result.articles = empty_response;
+                        } 
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
             }
     }    
 });
@@ -74,6 +93,24 @@ var result = new Vue({
     el: '#result-block',
     data: {
         articles: empty_response
+    },
+    updated:
+    function() {
+        $(function() {
+            /* выводит ошибки, ждем 7 альфу
+            $('[data-toggle="tooltip"]').tooltip();
+            */
+            $('[data-toggle="link"]').click(
+                function() {
+                    search.getarticle($(this).attr('data-item'));
+                }
+            );
+            $('[data-toggle="term"]').click(
+                function() {
+                    search.searchterm($(this).attr('data-item'));
+                }
+            );
+        });
     }
 });
 /* блок с результатами поиска */
@@ -99,6 +136,18 @@ var lastterms = new Vue({
     data: {
         terms: cookie,
         toggle: false
-    }
+    },
+    /* здесь мы реинициализируем отлеживание кликов по ссылкам последних терминов */
+    updated:
+        function() {
+            $(function() {
+                $('[data-toggle="term"]').click(
+                    function() {
+                        $('#search-field').val($(this).attr('data-item'));               
+                        search.searchterm();
+                    }
+                );
+            });
+        }
 });
 /* блок со списком последних найденных терминов */

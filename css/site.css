@@ -41,6 +41,10 @@ html {
     padding: 0.2rem;
 }
 
+.text-danger > a {
+    color: #d9534f!important;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
