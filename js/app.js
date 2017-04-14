@@ -19,6 +19,7 @@ var search = new Vue({
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
+                                
                             } else {
                                 result.articles = empty_response;
                             }                            
@@ -30,6 +31,7 @@ var search = new Vue({
                     });
                     term = newterm;
                 }
+                $('[data-toggle="tooltip"]').tooltip();
             },
         erase: 
             function(){        
