@@ -77,9 +77,7 @@ var search = new Vue({
                     url: 'https://samahsar.cv-haval.org/custom/view', 
                     success: function(data) {
                         if(!$.isEmptyObject(data)) {
-                            pager.pages.empty = false;
-                            pager.pages.next = data.pop();
-                            pager.pages.previous = data.pop();
+                            pager.pages = { 'empty': false, 'next': data.pop(), 'previous': data.pop() };
                             term = $('#search-field').val(data[0].word_orig);
                             result.articles = data;
                         } else {
@@ -165,6 +163,13 @@ var pager = new Vue({
     data: {
         pages: pages_empty
     },
+    methods: {
+        getarticle:
+            function (event) {
+                search.getarticle(event.target.attributes['data-item'].value);
+            }
+    }
+    /*
     updated:
         function() {
             $(function() {
@@ -180,5 +185,6 @@ var pager = new Vue({
                 );
             });
         }
+    */
 });
 /* блок с кнопками для перехода между статьями */
