@@ -13,10 +13,14 @@
     
 	<body>
 		<div class="container">
-
-            <div class="header text-center margin-bottom">
-                <h3>Н. И. Ашмарин * Чӑваш сӑмахӗсен кӗнеки</h3>
-            </div>
+            <nav id="wcounter" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand">
+                        <span class="first-part">Н. И. Ашмарин * </span>Чӑваш сӑмахӗсен кӗнеки
+                    </a>
+                </div>
+                <p class="navbar-text second-part pull-right" v-cloak>Сайтри <em>статья</em> шучӗ: <label class="label label-default" v-if="counter">{{ counter.count }}</label></p>
+            </nav>
 
 			<div id="search-block" class="input-group">
 				<span class="input-group-btn">
