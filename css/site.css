@@ -1,6 +1,25 @@
 html {
     padding-top: 2rem;
 }
+
+.header > h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.header > p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.progress {
+    margin-bottom: 0;
+}
+
+.progress. > .progress-bar {
+    min-width: 6em;
+}
+
 .margin-top {
     margin-top: 1rem;
 }
@@ -55,3 +74,13 @@ html {
 [v-cloak] {
   display: none;
 }
+
+@media (max-width: 991px) {
+    .navbar-header .first-part {
+    display:none;
+}}
+
+@media (max-width: 767px) {
+    .navbar .second-part {
+    display:none;
+}}

@@ -61,7 +61,6 @@ var search = new Vue({
                     });
                     term = newterm;
                 }
-                /* $('[data-toggle="tooltip"]').tooltip(); */
             },
         eraseterm: 
             function(){        
@@ -169,22 +168,27 @@ var pager = new Vue({
                 search.getarticle(event.target.attributes['data-item'].value);
             }
     }
-    /*
-    updated:
-        function() {
-            $(function() {
-                $('[data-toggle="previous"]').click(
-                    function() {
-                        search.getarticle($(this).attr('data-item'));
-                    }
-                );
-                $('[data-toggle="next"]').click(
-                    function() {
-                        search.getarticle($(this).attr('data-item'));
-                    }
-                );
-            });
-        }
-    */
 });
 /* блок с кнопками для перехода между статьями */
+
+var counter = new Vue({
+    el: '#wcounter',
+    data: {
+        counter: {'count': 0}           
+    },
+    created:
+        function() {
+            $.ajax({
+                method: 'GET', 
+                url: 'https://samahsar.cv-haval.org/custom/count', 
+                success: 
+                    function(data){
+                        counter.counter = data;
+                    },
+                error: 
+                    function(data){
+                        console.log(data);
+                    } 
+            })
+        }
+});
