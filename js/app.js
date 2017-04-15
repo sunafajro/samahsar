@@ -57,7 +57,7 @@ var search = new Vue({
                     });
                     term = newterm;
                 }
-                $('[data-toggle="tooltip"]').tooltip();
+                /* $('[data-toggle="tooltip"]').tooltip(); */
             },
         eraseterm: 
             function(){        
@@ -97,9 +97,7 @@ var result = new Vue({
     updated:
     function() {
         $(function() {
-            /* выводит ошибки, ждем 7 альфу
             $('[data-toggle="tooltip"]').tooltip();
-            */
             $('[data-toggle="link"]').click(
                 function() {
                     search.getarticle($(this).attr('data-item'));
