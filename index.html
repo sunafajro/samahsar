@@ -13,27 +13,31 @@
     
 	<body>
 		<div class="container">
+
             <div class="header text-center margin-bottom">
                 <h3>Н. И. Ашмарин * Чӑваш сӑмахӗсен кӗнеки</h3>
             </div>
+
 			<div id="search-block" class="input-group">
 				<span class="input-group-btn">
 					<button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="eraseterm"><span class="fa fa-eraser" aria-hidden="true"></span></button>
 				</span>
-				<input id="search-field" class="form-control form-control-lg" type="text" name="term" placeholder="Сăмаха çырăр..." v-on:keyup.enter="searchterm">
+				<input id="search-field" class="form-control input-lg" type="text" name="term" placeholder="Сăмаха çырăр..." v-on:keyup.enter="searchterm">
 				<span class="input-group-btn">
 					<button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="searchterm"><span class="fa fa-search" aria-hidden="true"></span></button>
 				</span>
 			</div>
+
             <div id="chuvkeys-block" class="button-block text-center" v-cloak>
-                <button type="button" class="btn btn-secondary btn-sm btn-chuv" v-for="button in buttons" v-on:click="addletter" v-if="!button.empty">{{ button }}</button>              
+                <button type="button" class="btn btn-default btn-xs btn-chuv" v-for="button in buttons" v-on:click="addletter" v-if="!button.empty">{{ button }}</button>              
             </div>  
+
 			<div id="result-block" class="margin-top" v-cloak>
-                <div class="card margin-bottom" v-for="article in articles" v-if="!article.empty">
-                    <div class="card-header"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
-                    <a class="btn btn-secondary btn-sm float-right" data-toggle="modal" data-target="#infoModal" title="Сообщить об ошибке!"><span class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></span></a>
+                <div class="panel panel-default margin-bottom" v-for="article in articles" v-if="!article.empty">
+                    <div class="panel-heading"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
+                    <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#infoModal" title="Сообщить об ошибке!"><span class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></span></a>
                     </div>
-                    <div class="card-block text-justify">
+                    <div class="panel-body text-justify">
                         <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>                        
                     </div>                                      
                 </div>
