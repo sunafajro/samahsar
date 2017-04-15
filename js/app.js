@@ -14,7 +14,8 @@ if(window.location.protocol == 'http:' || window.location.protocol == 'https:') 
 /* проверяем что страничка запущена с сервера инче куки нам не понадобятся */
 
 /* сообщение при загрузке страницы и при пустом ответе от сервера */
-var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите строку для поиска.', 'empty' : 'true' }];
+var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите слово которое хотите найти!', 'empty' : 'true' }];
+var not_found =[{ 'title': 'Пусто!', 'body': 'К сожалению ничего найти не удалось!', 'empty' : 'true' }];
 /* считываем модержимое строки поиска */
 var term = $('#search-field').val();
 
@@ -48,7 +49,7 @@ var search = new Vue({
                                 $.cookie('lastterms', cookie, { expires: 1, path: '/' });
                                 lastterms.terms = cookie.split(':');
                             } else {
-                                result.articles = empty_response;
+                                result.articles = not_found;
                             }                            
                         },
                         error: function (err) {
@@ -76,7 +77,7 @@ var search = new Vue({
                             term = $('#search-field').val(data.word_orig);
                             result.articles = [data];
                         } else {
-                            result.articles = empty_response;
+                            result.articles = not_found;
                         } 
                     },
                     error: function (err) {
