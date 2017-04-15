@@ -41,15 +41,21 @@
                         <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>                        
                     </div>                                      
                 </div>
-                <div class="alert alert-warning" role="alert" v-for="article in articles"  v-if="article.empty" v-cloak>
-                    <strong>{{ article.title }}</strong> {{ article.body }}                    
+                <div class="alert alert-warning" role="alert" v-if="articles[0].empty" v-cloak>
+                    <strong>{{ articles[0].title }}</strong> {{ articles[0].body }}                    
                 </div>
 			</div>
+            <nav id="pages-block" v-if="!pages[0].empty">
+                <ul class="pager">
+                    <li class="previous"><a :data-item="id" data-toggle="previous" role="button" tabindex="0"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ previous }}</a></li>
+                    <li class="next"><a :data-item="id" data-toggle="next" role="button" tabindex="0">{{ next }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
+                </ul>
+            </nav>
             
 		</div>
 
         <div id="lastterms-block" class="lastterms-list" v-cloak>
-            <button id="" class="btn btn-primary btn-sm" v-on:click="toggle = !toggle">История</button>
+            <button class="btn btn-primary btn-sm" v-on:click="toggle = !toggle">История</button>
             <transition name="fade">
                 <ul id="lastterms-list" v-if="toggle">
                     <li class="text-center" v-for="term in terms" v-if="!term.empty"><a data-toggle="term" :data-item="term" role="button" tabindex="0">{{ term }}</a></li>
