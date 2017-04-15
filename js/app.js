@@ -36,19 +36,7 @@ var search = new Vue({
                         success: function(data) {
                             if(!$.isEmptyObject(data)) {
                                 result.articles = data;
-                                var cookie = $.cookie('lastterms');
-                                if(cookie != '') {
-                                    cookie = cookie + ':';
-                                }
-                                cookie = cookie + newterm;
-                                /* оставляем только 10 последних уникальных терминов */
-                                arr = cookie.split(':');
-                                $.uniqueSort(arr);
-                                arr = arr.slice(-10);
-                                cookie = arr.join(':');
-                                /* обновляем куки и список последних терминов */
-                                $.cookie('lastterms', cookie, { expires: 1, path: '/' });
-                                lastterms.terms = cookie.split(':');
+                                lastterms.updateCookies(newterm);
                             } else {
                                 result.articles = not_found;
                             }
@@ -141,6 +129,24 @@ var lastterms = new Vue({
     data: {
         terms: cookie,
         toggle: false
+    },
+    methods: {
+        /* сохраняем куки */
+        updateCookies: function(newterm) {
+            var cookie = $.cookie('lastterms');
+            if(cookie != '') {
+                cookie = cookie + ':';
+            }
+            cookie = cookie + newterm;
+            /* оставляем только 10 последних уникальных терминов */
+            arr = cookie.split(':');
+            $.uniqueSort(arr);
+            arr = arr.slice(-10);
+            cookie = arr.join(':');
+            /* обновляем куки и список последних терминов */
+            $.cookie('lastterms', cookie, { expires: 1, path: '/' });
+            lastterms.terms = cookie.split(':');
+        }
     },
     /* здесь мы реинициализируем отлеживание кликов по ссылкам последних терминов */
     updated:
