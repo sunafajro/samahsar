@@ -16,7 +16,7 @@ if(window.location.protocol == 'http:' || window.location.protocol == 'https:') 
 /* сообщения при загрузке страницы и при пустом ответе от сервера */
 var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите слово которое хотите найти!', 'empty' : 'true' }];
 var not_found = [{ 'title': 'Пусто!', 'body': 'К сожалению ничего найти не удалось!', 'empty' : 'true' }];
-var pages_empty = [{'empty' : 'true'}];
+var pages_empty = {'empty': 'true'};
 /* считываем модержимое строки поиска */
 var term = $('#search-field').val();
 
@@ -52,9 +52,10 @@ var search = new Vue({
                             } else {
                                 result.articles = not_found;
                             }
-                            pages_empty[0]['empty'] = true;                            
+                            pager.pages = pages_empty;                            
                         },
                         error: function (err) {
+                            pager.pages = pages_empty;
                             console.log(err);
                         }
                     });
@@ -66,7 +67,7 @@ var search = new Vue({
             function(){        
                 term = $('#search-field').val('');
                 result.articles = empty_response;
-                pages_empty[0]['empty'] = true;
+                pager.pages = pages_empty;
             },
         getarticle:
             function(id) {
@@ -76,16 +77,18 @@ var search = new Vue({
                     url: 'https://samahsar.cv-haval.org/custom/view', 
                     success: function(data) {
                         if(!$.isEmptyObject(data)) {
-                            pages_empty[0]['empty'] = false;
-                            pages_empty[2] = data.pop();
-                            pages_empty[1] = data.pop();
+                            pager.pages.empty = false;
+                            pager.pages.next = data.pop();
+                            pager.pages.previous = data.pop();
                             term = $('#search-field').val(data[0].word_orig);
                             result.articles = data;
                         } else {
+                            pager.pages = pages_empty;
                             result.articles = not_found;
                         } 
                     },
                     error: function (err) {
+                        pager.pages = pages_empty;
                         console.log(err);
                     }
                 });

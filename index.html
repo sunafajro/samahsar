@@ -45,10 +45,10 @@
                     <strong>{{ articles[0].title }}</strong> {{ articles[0].body }}                    
                 </div>
 			</div>
-            <nav id="pages-block" v-if="!pages[0].empty">
+            <nav id="pages-block" v-if="!pages.empty">
                 <ul class="pager">
-                    <li class="previous"><a :data-item="pages[1].id" data-toggle="previous" role="button" tabindex="0"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pages[1].previous }}</a></li>
-                    <li class="next"><a :data-item="pages[2].id" data-toggle="next" role="button" tabindex="0">{{ pages[2].next }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
+                    <li class="previous"><a :data-item="pages.previous.id" data-toggle="previous" role="button" tabindex="0"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pages.previous.term }}</a></li>
+                    <li class="next"><a :data-item="pages.next.id" data-toggle="next" role="button" tabindex="0">{{ pages.next.term }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
                 </ul>
             </nav>
             
