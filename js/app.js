@@ -51,7 +51,8 @@ var search = new Vue({
                                 lastterms.terms = cookie.split(':');
                             } else {
                                 result.articles = not_found;
-                            }                            
+                            }
+                            pages_empty[0]['empty'] = true;                            
                         },
                         error: function (err) {
                             console.log(err);
@@ -65,6 +66,7 @@ var search = new Vue({
             function(){        
                 term = $('#search-field').val('');
                 result.articles = empty_response;
+                pages_empty[0]['empty'] = true;
             },
         getarticle:
             function(id) {
@@ -73,10 +75,12 @@ var search = new Vue({
                     data: 'id=' + id, 
                     url: 'https://samahsar.cv-haval.org/custom/view', 
                     success: function(data) {
-
                         if(!$.isEmptyObject(data)) {
-                            term = $('#search-field').val(data.word_orig);
-                            result.articles = [data];
+                            pages_empty[0]['empty'] = false;
+                            pages_empty[2] = data.pop();
+                            pages_empty[1] = data.pop();
+                            term = $('#search-field').val(data[0].word_orig);
+                            result.articles = data;
                         } else {
                             result.articles = not_found;
                         } 
@@ -97,21 +101,21 @@ var result = new Vue({
         articles: empty_response
     },
     updated:
-    function() {
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-            $('[data-toggle="link"]').click(
-                function() {
-                    search.getarticle($(this).attr('data-item'));
-                }
-            );
-            $('[data-toggle="term"]').click(
-                function() {
-                    search.searchterm($(this).attr('data-item'));
-                }
-            );
-        });
-    }
+        function() {
+            $(function() {
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-toggle="link"]').click(
+                    function() {
+                        search.getarticle($(this).attr('data-item'));
+                    }
+                );
+                $('[data-toggle="term"]').click(
+                    function() {
+                        search.searchterm($(this).attr('data-item'));
+                    }
+                );
+            });
+        }
 });
 /* блок с результатами поиска */
 
@@ -152,11 +156,26 @@ var lastterms = new Vue({
 });
 /* блок со списком последних найденных терминов */
 
-/* блок с чувашскими буквами */
+/* блок с кнопками для перехода между статьями */
 var pager = new Vue({
     el: '#pages-block',
     data: {
         pages: pages_empty
-    }
+    },
+    updated:
+        function() {
+            $(function() {
+                $('[data-toggle="previous"]').click(
+                    function() {
+                        search.getarticle($(this).attr('data-item'));
+                    }
+                );
+                $('[data-toggle="next"]').click(
+                    function() {
+                        search.getarticle($(this).attr('data-item'));
+                    }
+                );
+            });
+        }
 });
-/* блок с чувашскими буквами */
+/* блок с кнопками для перехода между статьями */

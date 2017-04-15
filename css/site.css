@@ -41,7 +41,7 @@ html {
     padding: 0.2rem;
 }
 
-.text-danger > a {
+.text-danger a {
     color: #d9534f!important;
 }
 

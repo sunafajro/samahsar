@@ -37,8 +37,8 @@
                     <div class="panel-heading"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
                     <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#infoModal" title="Сообщить об ошибке!"><span class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></span></a>
                     </div>
-                    <div class="panel-body text-justify">
-                        <div class="card-text" v-html="article.word_desc">{{ article.word_desc }}</div>                        
+                    <div class="panel-body text-justify" v-html="article.word_desc">
+                        {{ article.word_desc }}                  
                     </div>                                      
                 </div>
                 <div class="alert alert-warning" role="alert" v-if="articles[0].empty" v-cloak>
@@ -47,8 +47,8 @@
 			</div>
             <nav id="pages-block" v-if="!pages[0].empty">
                 <ul class="pager">
-                    <li class="previous"><a :data-item="id" data-toggle="previous" role="button" tabindex="0"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ previous }}</a></li>
-                    <li class="next"><a :data-item="id" data-toggle="next" role="button" tabindex="0">{{ next }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
+                    <li class="previous"><a :data-item="pages[1].id" data-toggle="previous" role="button" tabindex="0"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pages[1].previous }}</a></li>
+                    <li class="next"><a :data-item="pages[2].id" data-toggle="next" role="button" tabindex="0">{{ pages[2].next }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
                 </ul>
             </nav>
             
