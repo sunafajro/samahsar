@@ -14,8 +14,8 @@ if(window.location.protocol == 'http:' || window.location.protocol == 'https:') 
 /* проверяем что страничка запущена с сервера инче куки нам не понадобятся */
 
 /* сообщения при загрузке страницы и при пустом ответе от сервера */
-var response_empty = [{ 'title': 'Пусто!', 'body': 'Наберите слово которое хотите найти!', 'empty' : 'true' }];
-var response_not_found = [{ 'title': 'Пусто!', 'body': 'К сожалению ничего найти не удалось!', 'empty' : 'true' }];
+var response_empty = [{ 'title': 'Пусто!', 'body': 'Наберите слово которое хотите найти!', 'empty' : 'alert' }];
+var response_not_found = [{ 'title': 'Пусто!', 'body': 'К сожалению ничего найти не удалось!', 'empty' : 'alert' }];
 var pager_empty = {'empty': 'true'};
 var about_empty = {'empty': 'true'};
 /* считываем модержимое строки поиска */
@@ -26,7 +26,7 @@ var search = new Vue({
     el: '#search-block',
     data: '',
     methods: {
-        searchterm:
+        searchTerm:
             function() {
                 var newterm = $('#search-field').val();
                 if(newterm && newterm !== term) {
@@ -92,15 +92,11 @@ var result = new Vue({
     updated:
         function() {
             $(function() {
+                /* запускаем отслеживание событий для ссылок и аббревиатур */
                 $('[data-toggle="tooltip"]').tooltip();
                 $('[data-toggle="link"]').click(
                     function() {
                         search.getArticle($(this).attr('data-item'));
-                    }
-                );
-                $('[data-toggle="term"]').click(
-                    function() {
-                        search.searchterm($(this).attr('data-item'));
                     }
                 );
             });
@@ -152,7 +148,7 @@ var lastterms = new Vue({
         onClick:
             function(event) {
                 $('#search-field').val(event.target.attributes['data-item'].value);
-                search.searchterm();
+                search.searchTerm();
         }
     }
 });
@@ -180,34 +176,55 @@ var counter = new Vue({
         counter: {'count': 0}           
     },
     created:
-        function() {
+        function() {            
             $.ajax({
                 method: 'GET', 
                 url: 'https://samahsar.cv-haval.org/custom/count', 
                 success: 
                     function(data){
-                        counter.counter = data;
+                        if(!$.isEmptyObject(data)) {
+                            counter.counter = data;
+                        }
+                    },
+                error: 
+                    function(data){
+                        console.log(data);
+                    }                
+            });
+        }
+});
+/* блок с информацией о количестве статей на сайте */
+
+/* блок меню */
+var menu = new Vue({
+    el: '#menu-block',
+    data: {
+        items: [
+            { 'path': 'about', 'title': 'О сайте' },
+            { 'path': 'help', 'title': 'Помощникам' },
+        ]
+    },
+    methods: {
+        getInfo: 
+            function (type) {
+                $.ajax({
+                method: 'GET',
+                data: 'type=' + type,
+                url: 'https://samahsar.cv-haval.org/custom/info', 
+                success: 
+                    function(data){
+                        if(!$.isEmptyObject(data)) {
+                            tmp = [data];
+                            tmp[0].empty = 'page';
+                            result.articles = tmp;
+                        }
                     },
                 error: 
                     function(data){
                         console.log(data);
                     } 
-            })
-        }
-});
-/* блок с информацией о количестве статей на сайте */
-
-/* блок с информацией о сайте */
-var about = new Vue({
-    el: '#about-block',
-    data: {
-        data: about_empty
-    },
-    methods: {
-        getinfo: 
-            function (event) {
-                console.log(event.target.attributes['data-item'].value);
+                })
             }
     }
 });
-/* блок с информацией о сайте */
+/* блок меню */

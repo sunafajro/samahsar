@@ -15,7 +15,7 @@
 		<div class="container">
             <nav class="navbar navbar-default">                
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-block" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -25,13 +25,12 @@
                         <span class="first-part">Н. И. Ашмарин * </span>Чӑваш сӑмахӗсен кӗнеки
                     </a>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="menu-block">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Менӳ</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#about" v-on:click="about.getinfo()">Сайт ҫинчен</a></li>
-                                <li><a href="#help">Пулӑшуçă валли</a></li>
+                                <li v-for="item in items"><a role="button" tabindex="0" v-on:click="getInfo(item.path)" v-cloak>{{ item.title }}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -42,9 +41,9 @@
 				<span class="input-group-btn">
 					<button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="eraseTerm"><span class="fa fa-eraser" aria-hidden="true"></span></button>
 				</span>
-				<input id="search-field" class="form-control input-lg" type="text" name="term" placeholder="Сăмаха çырăр..." v-on:keyup.enter="searchterm">
+				<input id="search-field" class="form-control input-lg" type="text" name="term" placeholder="Искать слово..." v-on:keyup.enter="searchTerm">
 				<span class="input-group-btn">
-					<button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="searchterm"><span class="fa fa-search" aria-hidden="true"></span></button>
+					<button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="searchTerm"><span class="fa fa-search" aria-hidden="true"></span></button>
 				</span>
 			</div>
 
@@ -58,16 +57,19 @@
             </div>
 
 			<div id="result-block" class="margin-top" v-cloak>
-                <div class="panel panel-default margin-bottom" v-for="article in articles" v-if="!article.empty">
+                <div class="alert alert-warning" role="alert" v-if="articles[0].empty === 'alert'" v-cloak>
+                    <strong>{{ articles[0].title }}</strong> {{ articles[0].body }}                    
+                </div>
+                <div v-else-if="articles[0].empty === 'page'" v-cloak>
+                    <h3>{{ articles[0].title }}</h3> <div class="body" v-html="articles[0].content">{{ articles[0].content }}</div>                    
+                </div>
+                <div class="panel panel-default margin-bottom" v-for="article in articles" v-else>
                     <div class="panel-heading"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
                     <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#infoModal" title="Сообщить об ошибке!"><span class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-body text-justify" v-html="article.word_desc">
                         {{ article.word_desc }}                  
                     </div>                                      
-                </div>
-                <div class="alert alert-warning" role="alert" v-if="articles[0].empty" v-cloak>
-                    <strong>{{ articles[0].title }}</strong> {{ articles[0].body }}                    
                 </div>
 			</div>
             <nav id="pages-block" v-if="!pages.empty" v-cloak>
@@ -76,10 +78,6 @@
                     <li class="next"><a :data-item="pages.next.id" role="button" tabindex="0" v-on:click="getArticle">{{ pages.next.term }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
                 </ul>
             </nav>
-            <div id="about-block" v-if="!data.empty" v-cloak>
-                <h3>{{ data.title }}</h3>
-                <div class="body" v-html="data.body">{{ data.body }}</div>
-            </div>
             
 		</div>
 
