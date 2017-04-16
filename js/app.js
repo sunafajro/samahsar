@@ -14,9 +14,10 @@ if(window.location.protocol == 'http:' || window.location.protocol == 'https:') 
 /* проверяем что страничка запущена с сервера инче куки нам не понадобятся */
 
 /* сообщения при загрузке страницы и при пустом ответе от сервера */
-var empty_response = [{ 'title': 'Пусто!', 'body': 'Наберите слово которое хотите найти!', 'empty' : 'true' }];
-var not_found = [{ 'title': 'Пусто!', 'body': 'К сожалению ничего найти не удалось!', 'empty' : 'true' }];
-var pages_empty = {'empty': 'true'};
+var response_empty = [{ 'title': 'Пусто!', 'body': 'Наберите слово которое хотите найти!', 'empty' : 'true' }];
+var response_not_found = [{ 'title': 'Пусто!', 'body': 'К сожалению ничего найти не удалось!', 'empty' : 'true' }];
+var pager_empty = {'empty': 'true'};
+var about_empty = {'empty': 'true'};
 /* считываем модержимое строки поиска */
 var term = $('#search-field').val();
 
@@ -38,25 +39,25 @@ var search = new Vue({
                                 result.articles = data;
                                 lastterms.updateCookies(newterm);
                             } else {
-                                result.articles = not_found;
+                                result.articles = response_not_found;
                             }
-                            pager.pages = pages_empty;                            
+                            pager.pages = pager_empty;                            
                         },
                         error: function (err) {
-                            pager.pages = pages_empty;
+                            pager.pages = pager_empty;
                             console.log(err);
                         }
                     });
                     term = newterm;
                 }
             },
-        eraseterm: 
+        eraseTerm: 
             function(){        
                 term = $('#search-field').val('');
-                result.articles = empty_response;
-                pager.pages = pages_empty;
+                result.articles = response_empty;
+                pager.pages = pager_empty;
             },
-        getarticle:
+        getArticle:
             function(id) {
                 $.ajax({
                     method: 'GET', 
@@ -68,12 +69,12 @@ var search = new Vue({
                             term = $('#search-field').val(data[0].word_orig);
                             result.articles = data;
                         } else {
-                            pager.pages = pages_empty;
-                            result.articles = not_found;
+                            pager.pages = pager_empty;
+                            result.articles = response_not_found;
                         } 
                     },
                     error: function (err) {
-                        pager.pages = pages_empty;
+                        pager.pages = pager_empty;
                         console.log(err);
                     }
                 });
@@ -86,7 +87,7 @@ var search = new Vue({
 var result = new Vue({
     el: '#result-block',
     data: {
-        articles: empty_response
+        articles: response_empty
     },
     updated:
         function() {
@@ -94,7 +95,7 @@ var result = new Vue({
                 $('[data-toggle="tooltip"]').tooltip();
                 $('[data-toggle="link"]').click(
                     function() {
-                        search.getarticle($(this).attr('data-item'));
+                        search.getArticle($(this).attr('data-item'));
                     }
                 );
                 $('[data-toggle="term"]').click(
@@ -131,34 +132,29 @@ var lastterms = new Vue({
     },
     methods: {
         /* сохраняем куки */
-        updateCookies: function(newterm) {
-            var cookie = $.cookie('lastterms');
-            if(cookie != '') {
-                cookie = cookie + ':';
-            }
-            cookie = cookie + newterm;
-            /* оставляем только 10 последних уникальных терминов */
-            arr = cookie.split(':');
-            $.uniqueSort(arr);
-            arr = arr.slice(-10);
-            cookie = arr.join(':');
-            /* обновляем куки и список последних терминов */
-            $.cookie('lastterms', cookie, { expires: 1, path: '/' });
-            lastterms.terms = cookie.split(':');
+        updateCookies: 
+            function(newterm) {
+                var cookie = $.cookie('lastterms');
+                if(cookie != '') {
+                    cookie = cookie + ':';
+                }
+                cookie = cookie + newterm;
+                /* оставляем только 10 последних уникальных терминов */
+                arr = cookie.split(':');
+                $.uniqueSort(arr);
+                arr = arr.slice(-10);
+                cookie = arr.join(':');
+                /* обновляем куки и список последних терминов */
+                $.cookie('lastterms', cookie, { expires: 1, path: '/' });
+                lastterms.terms = cookie.split(':');
+            },
+        /* ловим событие */
+        onClick:
+            function(event) {
+                $('#search-field').val(event.target.attributes['data-item'].value);
+                search.searchterm();
         }
-    },
-    /* здесь мы реинициализируем отлеживание кликов по ссылкам последних терминов */
-    updated:
-        function() {
-            $(function() {
-                $('[data-toggle="term"]').click(
-                    function() {
-                        $('#search-field').val($(this).attr('data-item'));               
-                        search.searchterm();
-                    }
-                );
-            });
-        }
+    }
 });
 /* блок со списком последних найденных терминов */
 
@@ -166,17 +162,18 @@ var lastterms = new Vue({
 var pager = new Vue({
     el: '#pages-block',
     data: {
-        pages: pages_empty
+        pages: pager_empty
     },
     methods: {
-        getarticle:
+        getArticle:
             function (event) {
-                search.getarticle(event.target.attributes['data-item'].value);
+                search.getArticle(event.target.attributes['data-item'].value);
             }
     }
 });
 /* блок с кнопками для перехода между статьями */
 
+/* блок с информацией о количестве статей на сайте */
 var counter = new Vue({
     el: '#wcounter',
     data: {
@@ -198,3 +195,19 @@ var counter = new Vue({
             })
         }
 });
+/* блок с информацией о количестве статей на сайте */
+
+/* блок с информацией о сайте */
+var about = new Vue({
+    el: '#about-block',
+    data: {
+        data: about_empty
+    },
+    methods: {
+        getinfo: 
+            function (event) {
+                console.log(event.target.attributes['data-item'].value);
+            }
+    }
+});
+/* блок с информацией о сайте */
