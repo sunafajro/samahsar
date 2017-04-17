@@ -27,6 +27,10 @@
             <div class="error" v-if="error">
                 <div class="alert alert-danger">Ошибка Получения данных!</div>
             </div>
+
+            <div class="error" v-if="notfound">
+                <div class="alert alert-warning">Не удалось найти статью в словаре!</div>
+            </div>
             
             <div class="lastTen" v-if="lastten">
 
@@ -46,6 +50,10 @@
 </template>
 
 <script>
+
+/* считываем модержимое строки поиска */
+var term = $('#search-field').val();
+
 export default {
     name: 'home',
     data () { 
@@ -53,14 +61,18 @@ export default {
             search: true,
             buttons: ['ӑ', 'ӗ', 'љ', 'њ', 'р̌', 'ҫ', 'т̌', 'ӳ', 'ђ'],
             counter: {'count': 0},
-            lastten: false,
-            loading: false,
+            lastten: null,
+            loading: null,
             content: null,
+            notfound: null,
             error: null
         }
     },
     created () {
         this.fetchAll()
+    },
+    updated () {
+        $('[data-toggle="tooltip"]').tooltip();
     },
     watch: {
         '$route': 'fetchAll'
@@ -85,14 +97,38 @@ export default {
         },
 
         eraseTerm () {
-
+            term = $('#search-field').val('');
+            this.error = this.content = this.loading = this.notfound = null;
+            this.fetchLast();
         },
 
         searchTerm () {
+            var newterm = $('#search-field').val();
+            if(newterm && newterm !== term) {
+                this.error = this.content = null;
+                this.loading = true;
 
+                this.$http.get('https://samahsar.cv-haval.org/custom/search?term=' + newterm).then(response => {
+                    this.loading = false;
+                    if(!$.isEmptyObject(response.body)) {    
+                        this.content = response.body;
+                    } else {
+                        this.notfound = true;
+                    }
+
+                }, response => {
+                    this.loading = false;
+                    this.error = true;
+                });
+                term = newterm;
+            }
         },
 
-        pressButton () {
+        pressButton (event) {
+            var result = $('#search-field').val() + event.target.innerText;
+            $('#search-field').val(result);
+        },
+        updateCookies () {
 
         }
     }
@@ -116,5 +152,8 @@ export default {
 
     .button-block .btn-chuv:last-child {
         margin-right: 0;
+    }
+    .margin-top {
+        margin-top: 1rem;
     }
 </style>

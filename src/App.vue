@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse" id="menu-block">
               <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Менӳ</a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню</a>
                       <ul class="dropdown-menu">
                           <li><router-link to="/about">О сайте</router-link></li>
                           <li><router-link to="/helpus">Помощникам</router-link></li>
