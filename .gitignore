@@ -1,1 +1,8 @@
-/fa
+/*
+!/src/components
+!/src/router
+!/src/App.vue
+!/src/main.js
+!favicon.ico
+!index.html
+!.gitignore
