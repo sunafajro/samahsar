@@ -161,7 +161,6 @@ export default {
                 } else {
                     cookie = newterm;
                 }
-                console.log(cookie);
                 /* обновляем куки и список последних терминов */
                 this.$cookies.set('lastterms', cookie, 60*60*24, '/');
                 this.lastterms = cookie.split(':');
