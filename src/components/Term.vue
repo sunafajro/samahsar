@@ -5,6 +5,13 @@
         </div>
 
         <div class="error" v-if="error">Ошибка Получения данных!</div>
+        
+        <nav id="pager-block" v-if="pager">
+            <ul class="pager">
+                <li class="previous" v-if="pager.prev"><a v-bind:href="'#/term/' + pager.prev.id"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pager.prev.term }}</a></li>
+                <li class="next" v-if="pager.next"><a v-bind:href="'#/term/' + pager.next.id">{{ pager.next.term }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
+            </ul>
+        </nav>
 
         <div class="success" v-if="content">
             <div class="panel panel-default margin-bottom">
@@ -16,13 +23,6 @@
                     </div> 
             </div>
         </div>
-
-        <nav id="pager-block" v-if="pager">
-            <ul class="pager">
-                <li class="previous" v-if="pager.prev"><a v-bind:href="'#/term/' + pager.prev.id"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pager.prev.term }}</a></li>
-                <li class="next" v-if="pager.next"><a v-bind:href="'#/term/' + pager.next.id">{{ pager.next.term }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
-            </ul>
-        </nav>
     </div>
 </template>
 
