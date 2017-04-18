@@ -8,8 +8,8 @@
         
         <nav id="pager-block" v-if="pager">
             <ul class="pager">
-                <li class="previous" v-if="pager.prev"><a v-bind:href="'#/term/' + pager.prev.id"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pager.prev.term }}</a></li>
-                <li class="next" v-if="pager.next"><a v-bind:href="'#/term/' + pager.next.id">{{ pager.next.term }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
+                <li class="previous" v-if="pager.prev.id"><a v-bind:href="'#/term/' + pager.prev.id"><span class="fa fa-arrow-left" aria-hidden="true"></span> {{ pager.prev.term }}</a></li>
+                <li class="next" v-if="pager.next.id"><a v-bind:href="'#/term/' + pager.next.id">{{ pager.next.term }} <span class="fa fa-arrow-right" aria-hidden="true"></span></a></li>
             </ul>
         </nav>
 
@@ -52,9 +52,6 @@ export default {
                 this.loading = false;
                 this.pager = {'next': response.body.pop(), 'prev': response.body.pop()};
                 this.content = response.body.pop();
-
-                console.log(response.body);
-
             }, response => {
                 this.loading = false;
                 this.error = true;
