@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-default btn-xs btn-chuv" v-for="button in buttons" v-on:click="pressButton" v-if="buttons">{{ button }}</button>
             </div>
             <div id="wcounter" class="col-sm-4 wcounter text-right">
-                <span class="second-part">Сайтри <em>статья</em> шучӗ: <label class="label label-default" v-if="counter">{{ counter.count }}</label></span>
+                <span class="third-part">Сайтри <em>статья</em> шучӗ: <label class="label label-default" v-if="counter">{{ counter.count }}</label></span>
             </div>
         </div>
 
@@ -155,5 +155,14 @@ export default {
     }
     .margin-top {
         margin-top: 1rem;
+    }
+
+    @media (max-width: 767px) {
+        .third-part {
+            display:none;
+        }
+        .button-block {
+            text-align: center;
+        }
     }
 </style>

@@ -9,7 +9,7 @@
                   <span class="icon-bar"></span>
               </button>
               <a href="#/" class="navbar-brand">
-                  <span class="first-part">Н. И. Ашмарин * </span>Словарь чувашского языка
+                  <span class="first">Н. И. Ашмарин</span><span class="second"> * </span><span class="third">Словарь чувашского языка</span>
               </a>
           </div>
           <div class="collapse navbar-collapse" id="menu-block">
@@ -37,14 +37,25 @@ export default {
 <style>
 
 #app {
-  /*
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;  
-  text-align: center;
-  color: #2c3e50;
-  */
   margin-top: 1rem;
+}
+
+@media (max-width: 400px) {
+    .navbar-header .third {
+        display:none;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 767px) {
+    .navbar-header .first {
+        display:none;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-header .second {
+        display:none;
+    }
 }
 
 </style>
