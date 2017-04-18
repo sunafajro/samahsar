@@ -105,7 +105,7 @@ export default {
         searchTerm () {
             var newterm = $('#search-field').val();
             if(newterm && newterm !== term) {
-                this.error = this.content = null;
+                this.error = this.content = this.notfound = null;
                 this.loading = true;
 
                 this.$http.get('https://samahsar.cv-haval.org/custom/search?term=' + newterm).then(response => {
