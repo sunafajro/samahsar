@@ -37,7 +37,7 @@
             </div>
             <div class="content" v-if="content">
                 <div class="panel panel-default margin-bottom" v-for="article in content">
-                    <div class="panel-heading"><strong>{{ article.word_orig }}</strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
+                    <div class="panel-heading"><strong><a v-bind:href="'#/term/' + article.id">{{ article.word_orig }}</a></strong> <small>[{{ article.volume }} : {{ article.fpage }}<span v-if="article.fpage !== article.lpage"> - {{ article.lpage }}</span>]</small>
                         <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#infoModal" title="Сообщить об ошибке!"><span class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-body text-justify" v-html="article.word_desc">

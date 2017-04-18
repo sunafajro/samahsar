@@ -8,7 +8,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a href="/" class="navbar-brand">
+              <a href="#/" class="navbar-brand">
                   <span class="first-part">Н. И. Ашмарин * </span>Словарь чувашского языка
               </a>
           </div>
