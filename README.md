@@ -7,7 +7,7 @@ VueJS фронтенд к ресурсу samahsar.cv-haval.org.
   * Vue Cookies
 
 ### Для тех кто хочет помочь в разработке:
-    0. Скачать и установить NodeJS и NPM
+    0.  Скачать и установить NodeJS и NPM
 	1.  Устанавливаем vue-cli (могут потребоваться права root в linux)
 		$ npm install --global vue-cli
 
