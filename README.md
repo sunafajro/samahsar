@@ -23,6 +23,7 @@ VueJS фронтенд к ресурсу samahsar.cv-haval.org.
 		$ npm install vue-cookies
 
 	2.  Клонируем гит репозиторий в проект
+	    git init
         git clone https://github.com/sunafajro/samahsar.git
 
     3.  Запуск веб сервера
