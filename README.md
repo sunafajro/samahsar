@@ -6,7 +6,7 @@ VueJS фронтенд к ресурсу samahsar.cv-haval.org.
   * Vue Resources
   * Vue Cookies
 
-###Для тех кто хочет помочь в разработке:
+### Для тех кто хочет помочь в разработке:
 	1.  _устанавливаем vue-cli (могут потребоваться права root в linux)_
 		`$ npm install --global vue-cli`
 
