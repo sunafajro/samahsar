@@ -26,7 +26,7 @@ VueJS фронтенд к ресурсу samahsar.cv-haval.org.
 	    git init
         git clone https://github.com/sunafajro/samahsar.git
 
-    3.  Запуск веб сервера
+    3.  Запуск встроенного веб-сервера
         npm run dev
 
     4. Компиляция исходников в готовый проект (помещается в папку dist)
