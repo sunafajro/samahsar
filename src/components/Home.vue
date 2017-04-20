@@ -1,6 +1,7 @@
 <template>
     <div class="home">
-        <div id="result" class="margin-top" v-cloak>
+        <h4>Последние добавленные статьи:</h4>
+        <div id="result" class="margin-top">
             <div class="loading" v-if="loading">
                 <div class="alert alert-warning">Идет загрузка...</div>
             </div>
@@ -9,8 +10,17 @@
                 <div class="alert alert-danger">Ошибка Получения данных!</div>
             </div>
             
-            <div class="randomterms" v-if="randomterms">
-
+            <div class="lastterms" v-if="lastterms">
+                <div class="row" v-for="rows in lastterms" v-if="lastterms.length > 0">
+                    <div class="col-sm-4" v-for="item in rows">
+                        <div class="panel panel-default">
+                            <div class="panel-body" v-html="item.word_desc">
+                                {{ item.word_desc }}                  
+                            </div> 
+                            <div class="panel-footer"><small>[{{ item.volume }} : {{ item.fpage }}<span v-if="item.fpage !== item.lpage"> - {{ item.lpage }}</span>]</small></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>    
     </div> <!-- home -->
@@ -22,15 +32,14 @@ export default {
     name: 'home',
     data () { 
         return {
-            randomterms: null,
+            lastterms: null,
             loading: null,
-            content: null,
             notfound: null,
             error: null
         }
     },
     created () {
-        this.fetchRandomTerms();        
+        this.fetchLastTerms();        
     },
     updated () {
         $('[data-toggle="tooltip"]').tooltip();
@@ -40,8 +49,17 @@ export default {
     },
     methods: {
         /* запрос случайных 9 терминов  */ 
-        fetchRandomTerms () {
+        fetchLastTerms () {
+            this.error = this.randomterms = null;
+            this.loading = true;
 
+            this.$http.get('https://samahsar.cv-haval.org/custom/lastterms').then(response => {
+                this.loading = false;
+                this.lastterms = response.body;
+            }, response => {
+                this.loading = false;
+                this.error = true;
+            });
         }
     }
 
@@ -53,6 +71,9 @@ export default {
 
     .margin-top {
         margin-top: 1rem;
+    }
+    .panel .panel-body {
+        min-height: 100px;
     }
 
 </style>
