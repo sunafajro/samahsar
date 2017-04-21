@@ -3,31 +3,17 @@ VueJS фронтенд к ресурсу samahsar.cv-haval.org.
 
 ### Зависимости:
   * Vue Router
-  * Vue Resources
+  * Vue Resource
   * Vue Cookies
 
 ### Для тех кто хочет помочь в разработке:
     0.  Скачать и установить NodeJS и NPM
-	1.  Устанавливаем vue-cli (могут потребоваться права root в linux)
-		$ npm install --global vue-cli
-
-		Создаем пустой проект
-		$ vue init webpack samahsar
-
-		Переходим в каталог проекта
-		$ cd samahsar
-
-		Запускаем установку зависимостей
-		$ npm install
-		$ npm install vue-resources
-		$ npm install vue-cookies
-
-	2.  Клонируем гит репозиторий в проект
-	    git init
+	1.  Клонируем гит репозиторий в рабочую папку
         git clone https://github.com/sunafajro/samahsar.git
-
-    3.  Запуск встроенного веб-сервера
+    2.  Устанавливаем зависимости
+        npm install
+    3.  Запускаем встроенный веб-сервер
         npm run dev
 
-    4. Компиляция исходников в готовый проект (помещается в папку dist)
+    4. Компилируем исходники в готовый проект (помещается в папку dist)
         npm run build
