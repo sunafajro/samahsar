@@ -22,9 +22,14 @@ new Vue({
   template: '<App/>',
   components: { App },
   created () {
-  	    this.$lang.setLang('ru');
   	    if(!this.$cookies.isKey('lastterms')) {
             this.$cookies.set('lastterms', '', 60*60*24, '/');
+        }
+        if(!this.$cookies.isKey('lang')) {
+        	this.$lang.setLang('ru');
+            this.$cookies.set('lang', 'ru', 60*60*24, '/');
+        } else {
+        	this.$lang.setLang(this.$cookies.get('lang'));
         }
   }
 })

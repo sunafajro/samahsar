@@ -46,7 +46,7 @@
           <div id="sidebar-btn" class="col-sm-4">
               <div class="dropdown" v-if="lastterms.length > 0">
                   <button class="btn btn-primary btn-xs dropdown-toggle btn-history" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      История
+                      {{ $lang.messages.history }}
                       <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -145,6 +145,7 @@ export default {
         toggleLang (lang) {
             if(this.$lang.getLang() !== lang) {
               this.$lang.setLang(lang);
+              this.$cookies.set('lang', lang, 60*60*24, '/');
             }
         }
     }
