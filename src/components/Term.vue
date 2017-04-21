@@ -40,6 +40,7 @@ export default {
     created () {
         this.fetchData()
     },
+    /* отслеживаем изменение маршрута в пределах компонента */
     watch: {
         '$route': 'fetchData'
     },

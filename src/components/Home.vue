@@ -39,13 +39,13 @@ export default {
         }
     },
     created () {
-        this.fetchLastTerms();        
+        this.fetchLastTerms();
     },
     updated () {
         $('[data-toggle="tooltip"]').tooltip();
     },
     watch: {
-        '$route': 'fetchAll'
+        '$route': 'fetchLastTerms',
     },
     methods: {
         /* запрос случайных 9 терминов  */ 
