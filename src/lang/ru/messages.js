@@ -7,5 +7,6 @@ module.exports = {
   'n_i_ashmarin': 'Н.И. Ашмарин',
   'chuvash_dictionary': 'Словарь чувашского языка',
   'articles_on_site': 'Словарных статей на сайте',
-  'last_added_articles': 'Последние добаленные статьи'
+  'last_added_articles': 'Последние добаленные статьи',
+  'haval_org': 'Чувашская общественная организация "Хавал"'
 }

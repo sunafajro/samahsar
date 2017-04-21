@@ -1,68 +1,77 @@
 <template>
-  <div id="app">
-      <nav class="navbar navbar-default">                
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-block" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a href="#/" class="navbar-brand">
-                  <span class="first">{{ $lang.messages.n_i_ashmarin }}</span><span class="second"> * </span><span class="third">{{ $lang.messages.chuvash_dictionary }}</span>
-              </a>
-          </div>
-          <div class="collapse navbar-collapse" id="menu-block">
-              <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $lang.getLang() }}</span></a>
-                      <ul class="dropdown-menu">
-                          <li v-if="$lang.getLang() != 'cv'" v-on:click="toggleLang('cv')"><a>cv</a></li>
-                          <li v-if="$lang.getLang() != 'ru'" v-on:click="toggleLang('ru')"><a>ru</a></li>
-                          <li v-if="$lang.getLang() != 'eo'" v-on:click="toggleLang('eo')"><a>eo</a></li>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$lang.messages.menu}}</a>
-                      <ul class="dropdown-menu">
-                          <li><router-link to="/about">{{$lang.messages.about}}</router-link></li>
-                          <li><router-link to="/helpus">{{$lang.messages.for_helpers}}</router-link></li>
-                      </ul>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-      <div id="search" class="input-group" v-if="search">
-          <span class="input-group-btn">
-              <button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="eraseTerm"><span class="fa fa-eraser" aria-hidden="true"></span></button>
-          </span>
-          <input id="search-field" class="form-control input-lg" type="text" name="term" v-bind:placeholder="$lang.messages.search_word" v-on:keyup.enter="searchTerm">
-          <span class="input-group-btn">
-              <button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="searchTerm"><span class="fa fa-search" aria-hidden="true"></span></button>
-          </span>
-      </div>
-
-      <div class="row">
-          <div id="sidebar-btn" class="col-sm-4">
-              <div class="dropdown" v-if="lastterms.length > 0">
-                  <button class="btn btn-primary btn-xs dropdown-toggle btn-history" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      {{ $lang.messages.history }}
-                      <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li v-for="lastterm in lastterms"><a v-bind:href="'#/search/' + lastterm">{{ lastterm }}</a></li>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-fixed-top">    
+            <div class="container">            
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-block" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#/" class="navbar-brand">
+                        <span class="first">{{ $lang.messages.n_i_ashmarin }}</span><span class="second"> * </span><span class="third">{{ $lang.messages.chuvash_dictionary }}</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="menu-block">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $lang.getLang() }}</span></a>
+                            <ul class="dropdown-menu">
+                                <li v-if="$lang.getLang() != 'cv'" v-on:click="toggleLang('cv')"><a>cv</a></li>
+                                <li v-if="$lang.getLang() != 'ru'" v-on:click="toggleLang('ru')"><a>ru</a></li>
+                                <li v-if="$lang.getLang() != 'eo'" v-on:click="toggleLang('eo')"><a>eo</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$lang.messages.menu}}</a>
+                            <ul class="dropdown-menu">
+                                <li><router-link to="/about">{{$lang.messages.about}}</router-link></li>
+                                <li><router-link to="/helpus">{{$lang.messages.for_helpers}}</router-link></li>
+                            </ul>
+                        </li>
                     </ul>
-              </div>
-          </div>
-          <div id="buttons" class="col-sm-4 button-block text-center">
-              <button type="button" class="btn btn-default btn-xs btn-chuv" v-for="button in buttons" v-on:click="pressButton" v-if="buttons">{{ button }}</button>
-          </div>
-          <div id="wcounter" class="col-sm-4 wcounter text-right">
-              <span class="third-part">{{ $lang.messages.articles_on_site }}: <label class="label label-default" v-if="counter">{{ counter.count }}</label></span>
-          </div>
-      </div>
-    <router-view></router-view>
-  </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div id="search" class="input-group" v-if="search">
+                <span class="input-group-btn">
+                    <button id="erase-btn" class="btn btn-warning btn-lg" type="button" v-on:click="eraseTerm"><span class="fa fa-eraser" aria-hidden="true"></span></button>
+                </span>
+                <input id="search-field" class="form-control input-lg" type="text" name="term" v-bind:placeholder="$lang.messages.search_word" v-on:keyup.enter="searchTerm">
+                <span class="input-group-btn">
+                    <button id="search-btn" class="btn btn-info btn-lg" type="button" v-on:click="searchTerm"><span class="fa fa-search" aria-hidden="true"></span></button>
+                </span>
+            </div>
+
+            <div class="row">
+                <div id="sidebar-btn" class="col-sm-4">
+                    <div class="dropdown" v-if="lastterms.length > 0">
+                        <button class="btn btn-primary btn-xs dropdown-toggle btn-history" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{ $lang.messages.history }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li v-for="lastterm in lastterms"><a v-bind:href="'#/search/' + lastterm">{{ lastterm }}</a></li>
+                          </ul>
+                    </div>
+                </div>
+                <div id="buttons" class="col-sm-4 button-block text-center">
+                    <button type="button" class="btn btn-default btn-xs btn-chuv" v-for="button in buttons" v-on:click="pressButton" v-if="buttons">{{ button }}</button>
+                </div>
+                <div id="wcounter" class="col-sm-4 wcounter text-right">
+                    <span class="third-part">{{ $lang.messages.articles_on_site }}: <label class="label label-default" v-if="counter">{{ counter.count }}</label></span>
+                </div>
+            </div>
+            <router-view></router-view>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <p class="text-muted">© {{ $lang.messages.haval_org }}, 2017</p>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>

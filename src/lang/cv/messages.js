@@ -7,5 +7,6 @@ module.exports = {
   'n_i_ashmarin': 'Н.И. Ашмарин',
   'chuvash_dictionary': 'Чӑваш сӑмахӗсен кӗнеки',
   'articles_on_site': 'Сайтри статья шучӗ',
-  'last_added_articles': 'Хальтерех кӗртнӗ статьясем'
+  'last_added_articles': 'Хальтерех кӗртнӗ статьясем',
+  'haval_org': '"Хавал" чăваш халăх пĕрлешĕвĕ'
 }
