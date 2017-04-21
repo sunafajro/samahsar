@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <h4>Последние добавленные статьи:</h4>
+        <h4>{{ $lang.messages.last_added_articles }}:</h4>
         <div id="result" class="margin-top">
             <div class="loading" v-if="loading">
                 <div class="alert alert-warning">Идет загрузка...</div>
