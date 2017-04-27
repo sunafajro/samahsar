@@ -28,7 +28,10 @@ export default {
     },
     /*
     watch: {
-        '$route': 'fetchData'
+        '$route': 'fetchData',
+        '$lang.current_lang': function () {
+            this.$forceUpdate();
+        }
     },
     */
     methods: {
