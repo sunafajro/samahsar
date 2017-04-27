@@ -1,6 +1,5 @@
 <template>
     <div class="home">
-        <button v-on:click="someAction">Тест</button>
         <h4>{{ $lang.messages.last_added_articles }}:</h4>
         <div id="result" class="margin-top">
             <div class="loading" v-if="loading">
@@ -41,7 +40,6 @@ export default {
     },
     created () {
         this.fetchLastTerms();
-        console.log(this.$router);
     },
     updated () {
         $('[data-toggle="tooltip"]').tooltip();
