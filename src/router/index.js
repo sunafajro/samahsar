@@ -35,5 +35,6 @@ export default new Router({
             name: 'term',
             component: Term,
         }
-    ]
+    ],
+
 })
