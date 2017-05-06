@@ -8,5 +8,6 @@ module.exports = {
   'chuvash_dictionary': 'Чӑваш сӑмахӗсен кӗнеки',
   'articles_on_site': 'Сайтри статья шучӗ',
   'last_added_articles': 'Хальтерех кӗртнӗ статьясем',
-  'haval_org': '"Хавал" чăваш халăх пĕрлешĕвĕ'
+  'haval_org': '"Хавал" чăваш халăх пĕрлешĕвĕ',
+  'more_text': 'Туллин...'
 }
