@@ -5,6 +5,7 @@ VueJS фронтенд к ресурсу samahsar.cv-haval.org.
   * Vue Router
   * Vue Resource
   * Vue Cookies
+  * Vuejs Localization
 
 ### Для тех кто хочет помочь в разработке:
     0.  Скачать и установить NodeJS и NPM
