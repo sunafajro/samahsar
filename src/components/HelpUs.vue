@@ -26,9 +26,14 @@ export default {
     created () {
         this.fetchData()
     },
+    /*
     watch: {
-        '$route': 'fetchData'
+        '$route': 'fetchData',
+        '$lang.current_lang': function () {
+            this.$forceUpdate();
+        }
     },
+    */
     methods: {
         fetchData () {
             this.error = this.page = null;
